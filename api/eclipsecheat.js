@@ -29,7 +29,7 @@ export default async function handler(req, res) {
   // Normalize newlines and count lines
   const normalized = content.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
   const lineCount = normalized === "" ? 0 : normalized.split("\n").length;
-  if (lineCount > 2) {
+  if (lineCount > 3) {
     return res.status(400).json({ ok: false, error: "Content has more than 2 lines; declined" });
   }
 
