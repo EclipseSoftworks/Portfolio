@@ -1,4 +1,4 @@
-let eclipsecheat = 2009; // stored in memory (resets when Vercel restarts)
+let eclipsecheat = 80085366729628; // stored in memory (resets when Vercel restarts)
 
 export default function handler(req, res) {
   if (req.method === 'GET') {
