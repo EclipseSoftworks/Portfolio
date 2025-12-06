@@ -232,30 +232,31 @@
             border-radius: 50%;
             border: 2px solid var(--main-blue);
             animation: pulse-ring 3s ease-in-out infinite;
+            pointer-events: none;
         }
 
         .aura-ring:nth-child(1) {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            opacity: 0.6;
-        }
-
-        .aura-ring:nth-child(2) {
             width: 120%;
             height: 120%;
             top: -10%;
             left: -10%;
+            opacity: 0.6;
+        }
+
+        .aura-ring:nth-child(2) {
+            width: 140%;
+            height: 140%;
+            top: -20%;
+            left: -20%;
             opacity: 0.4;
             animation-delay: -1s;
         }
 
         .aura-ring:nth-child(3) {
-            width: 140%;
-            height: 140%;
-            top: -20%;
-            left: -20%;
+            width: 160%;
+            height: 160%;
+            top: -30%;
+            left: -30%;
             opacity: 0.2;
             animation-delay: -2s;
         }
@@ -272,16 +273,22 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: radial-gradient(circle, rgba(0, 102, 255, 0.4) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(147, 197, 253, 0.1) 40%, transparent 70%);
             border-radius: 50%;
-            filter: blur(60px);
-            animation: glow-pulse 4s ease-in-out infinite;
+            animation: aura-pulse 3s ease-in-out infinite alternate;
+            pointer-events: none;
             z-index: -1;
         }
 
-        @keyframes glow-pulse {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        @keyframes aura-pulse {
+            0% { 
+                opacity: 0.4;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% { 
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
         }
 
         .profile-image {
@@ -291,8 +298,11 @@
             object-fit: cover;
             border: 4px solid var(--main-blue);
             box-shadow: 0 0 100px rgba(0, 102, 255, 0.6);
-            position: relative;
-            z-index: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
         }
 
         /* Code Section */
@@ -714,29 +724,24 @@
         }
 
         .modal-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
             margin-top: 40px;
-            align-items: start;
         }
 
         .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
+            width: 100%;
             border-radius: 20px;
             overflow: hidden;
             background: var(--bg-black);
             box-shadow: 0 20px 60px rgba(0, 102, 255, 0.3);
+            margin-bottom: 40px;
         }
 
         .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
+            height: 500px;
             border: none;
         }
 
@@ -745,6 +750,7 @@
             border: 1px solid var(--border-grey);
             border-radius: 20px;
             padding: 40px;
+            margin-top: 0;
         }
 
         .modal-features h3 {
@@ -956,28 +962,28 @@
                     <img src="Images/Luau.png" alt="LuaU">
                 </div>
                 <h3 class="skill-name">LuaU</h3>
-                <p class="skill-details">Advanced Roblox scripting, exploit development, and serverside programming with cutting-edge techniques</p>
+                <p class="skill-details">Expert in Roblox game development, admin systems, and advanced scripting with professional-grade optimization techniques</p>
             </div>
             <div class="skill-item">
                 <div class="skill-symbol">
                     <img src="Images/Javascript.png" alt="JavaScript">
                 </div>
                 <h3 class="skill-name">JavaScript</h3>
-                <p class="skill-details">Modern web development, Node.js backend systems, and dynamic frontend applications</p>
+                <p class="skill-details">Full-stack JavaScript development with React, Node.js, Express, and modern frameworks for scalable web applications</p>
             </div>
             <div class="skill-item">
                 <div class="skill-symbol">
                     <img src="Images/Python.png" alt="Python">
                 </div>
                 <h3 class="skill-name">Python</h3>
-                <p class="skill-details">Data analysis, automation scripts, machine learning, and backend development frameworks</p>
+                <p class="skill-details">Advanced automation, bot development, API integration, and backend systems with Django and Flask frameworks</p>
             </div>
             <div class="skill-item">
                 <div class="skill-symbol">
                     <img src="Images/html.png" alt="HTML">
                 </div>
-                <h3 class="skill-name">HTML</h3>
-                <p class="skill-details">Semantic markup, accessibility standards, and modern web development best practices</p>
+                <h3 class="skill-name">HTML & CSS</h3>
+                <p class="skill-details">Modern responsive web design, UI/UX principles, and pixel-perfect interfaces with advanced CSS animations</p>
             </div>
         </div>
     </section>
@@ -994,9 +1000,9 @@
                     <img src="Images/EclipseCheats.PNG" alt="Eclipse Cheats™">
                 </div>
                 <div class="product-info">
-                    <div class="product-badge">● WORKING</div>
-                    <h3 class="product-title">Eclipse Cheats</h3>
-                    <p class="product-text">#1 Serverside Worldwide being cheap and comes with many benefits</p>
+                    <div class="product-badge">● ACTIVE</div>
+                    <h3 class="product-title">Eclipse Admin</h3>
+                    <p class="product-text">#1 Paid Roblox Admin Commands - Professional-grade administrative tools trusted by thousands worldwide</p>
                     <div class="product-buttons">
                         <a href="https://www.serverside.ltd/" class="action-btn" target="_blank">Visit Eclipse</a>
                         <button class="action-btn action-btn-secondary" onclick="openModal()">View More</button>
@@ -1030,14 +1036,15 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
             <div class="modal-body">
-                <h2 class="modal-title">Eclipse Cheats™</h2>
-                <p class="product-text">The most powerful and affordable Roblox serverside solution on the market. Trusted by thousands of users worldwide.</p>
+                <h2 class="modal-title">Eclipse Admin™</h2>
+                <p class="product-text">#1 Paid Roblox Admin Commands - The most powerful and professional administrative solution for Roblox.</p>
                 
                 <div class="modal-grid">
                     <div class="video-container">
                         <iframe 
-                            src="https://www.youtube.com/embed/pHpsumM-pWs?autoplay=0&rel=0" 
-                            title="Eclipse Cheats Demo"
+                            id="modalVideo"
+                            src="https://www.youtube.com/embed/pHpsumM-pWs?autoplay=0&rel=0&enablejsapi=1" 
+                            title="Eclipse Admin Demo"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin"
@@ -1046,15 +1053,17 @@
                     </div>
                     
                     <div class="modal-features">
-                        <h3>About Eclipse</h3>
+                        <h3>About Eclipse Admin</h3>
                         <p class="modal-description">
-                            <strong>Eclipse Cheats</strong> is the premier Roblox serverside solution trusted by thousands worldwide. 
+                            <strong>Eclipse Admin</strong> is the premier Roblox admin command system trusted by thousands worldwide. 
                             <br><br>
-                            Our platform offers <strong>unmatched performance</strong>, complete security, and an intuitive interface that makes advanced scripting accessible to everyone.
+                            Our platform offers <strong>unmatched performance</strong>, complete security, and an intuitive interface that makes advanced administration accessible to everyone.
                             <br><br>
-                            With <strong>24/7 support</strong>, regular updates, and a vast library of pre-built scripts, Eclipse Cheats delivers everything you need to dominate the game.
+                            With <strong>24/7 support</strong>, regular updates, and a vast library of premium commands, Eclipse Admin delivers everything you need to control your Roblox experience.
                             <br><br>
-                            Join our growing community and experience the <strong>#1 serverside</strong> that combines power, affordability, and reliability.
+                            Join our growing community and experience the <strong>#1 paid admin system</strong> that combines power, affordability, and reliability.
+                            <br><br>
+                            <strong>Key Features:</strong> Advanced command execution, customizable permissions, anti-exploit protection, cross-game compatibility, premium script hub, and dedicated customer support.
                         </p>
                     </div>
                 </div>
@@ -1088,7 +1097,13 @@
         }
 
         function closeModal() {
-            document.getElementById('productModal').classList.remove('active');
+            const modal = document.getElementById('productModal');
+            const iframe = document.getElementById('modalVideo');
+            
+            // Stop the video
+            iframe.src = iframe.src;
+            
+            modal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
