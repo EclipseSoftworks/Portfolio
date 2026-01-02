@@ -1,13 +1,21 @@
 // /api/eclipsedatabase.js
 
 let gamesDatabase = []; // in-memory storage
+let lastReset = Date.now();
 
 const API_KEY = 'K7f9D4sX2mLpQ8zV6rT1bNjU3wYvA0HqZ5xRkCjF9aE2oP1sL8dM';
+const RESET_INTERVAL = 60 * 60 * 1000; // 1 hour
 
 export default async function handler(req, res) {
+
+  // ⏰ Auto reset every hour
+  if (Date.now() - lastReset >= RESET_INTERVAL) {
+    gamesDatabase = [];
+    lastReset = Date.now();
+  }
+
   if (req.method === 'POST') {
     try {
-      // Parse JSON body manually
       const body = await new Promise((resolve, reject) => {
         let data = '';
         req.on('data', chunk => data += chunk);
@@ -30,13 +38,30 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Invalid games data' });
       }
 
-      // Update memory
-      gamesDatabase = games;
+      // 🔁 Merge / update by Gameid
+      for (const newGame of games) {
+        if (!newGame.Gameid) continue;
+
+        const index = gamesDatabase.findIndex(
+          g => g.Gameid === newGame.Gameid
+        );
+
+        if (index !== -1) {
+          // Update existing game
+          gamesDatabase[index] = {
+            ...gamesDatabase[index],
+            ...newGame
+          };
+        } else {
+          // Add new game
+          gamesDatabase.push(newGame);
+        }
+      }
 
       return res.status(200).json({
         success: true,
-        message: 'Games updated successfully!',
-        totalGames: gamesDatabase.length,
+        message: 'Games stored successfully!',
+        totalGames: gamesDatabase.length
       });
 
     } catch (err) {
