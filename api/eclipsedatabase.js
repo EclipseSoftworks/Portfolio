@@ -2,6 +2,7 @@
 
 let gamesDatabase = []; // in-memory storage (works on Vercel)
 
+// Your API key
 const API_KEY = 'K7f9D4sX2mLpQ8zV6rT1bNjU3wYvA0HqZ5xRkCjF9aE2oP1sL8dM';
 
 export default function handler(req, res) {
