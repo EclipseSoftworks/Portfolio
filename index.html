@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Developer_Isiah</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="1.webp" type="image/webp">
+</head>
+<body>
+    <!-- ENTER SCREEN -->
+    <div id="enter-screen">
+        <h1>Click to Enter</h1>
+    </div>
+
+    <!-- MUSIC -->
+    <audio loop id="bgMusic">
+        <source src="music.m4a" type="audio/mpeg">
+    </audio>
+
+    <!-- MAIN CONTENT -->
+    <div class="main hidden" id="mainContent">
+        <div class="card">
+            <img src="1.webp" class="profile">
+            <h1>Isiah</h1>
+            <p class="subtitle">CEO of Hexon</p>
+            <p class="description">
+                Hey! I’m Isiah. Not much to say.
+            </p>
+            <div class="socials">
+                <a href="https://www.roblox.com/users/37969206/profile"><img src="roblox.png"></a>
+                <a href="https://hexon.wtf"><img src="hexon.png"></a>
+                <a href="https://www.youtube.com/@IsiahProducts"><img src="youtube.png"></a>
+                <a href="https://discord.gg/Y7B2fGmrjk"><img src="discord.png"></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const enterScreen = document.getElementById("enter-screen");
+        const main = document.getElementById("mainContent");
+        const music = document.getElementById("bgMusic");
+
+        enterScreen.addEventListener("click", () => {
+            enterScreen.classList.add("fade-out");
+            setTimeout(() => {
+                enterScreen.style.display = "none";
+                main.classList.remove("hidden");
+                music.play();
+            }, 500);
+        });
+
+        // Typing + backspace one letter at a time with 0.5s pause per letter
+        const fullTitle = "@Isiah";
+        let currentIndex = 1; // keep 'D' visible
+        let typingForward = true; 
+        const typingSpeed = 500; // 0.5 second per letter
+        const pauseFull = 500;   // pause at full title
+        const pauseD = 500;      // pause at 'D'
+
+        function animateTitle() {
+            document.title = fullTitle.substring(0, currentIndex);
+
+            if (typingForward) {
+                if (currentIndex < fullTitle.length) {
+                    currentIndex++;
+                    setTimeout(animateTitle, typingSpeed);
+                } else {
+                    setTimeout(() => {
+                        typingForward = false;
+                        animateTitle();
+                    }, pauseFull);
+                }
+            } else {
+                if (currentIndex > 1) {
+                    currentIndex--;
+                    setTimeout(animateTitle, typingSpeed);
+                } else {
+                    setTimeout(() => {
+                        typingForward = true;
+                        animateTitle();
+                    }, pauseD);
+                }
+            }
+        }
+
+        animateTitle(); // start animation
+    </script>
+</body>
+</html>
