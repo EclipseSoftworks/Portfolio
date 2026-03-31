@@ -1,7 +1,5 @@
 let executionLog = [];
-
-// Replace this with a secure random key in production
-const API_KEY = "HEXONEXECUTIONSTATEMATTER";
+const API_KEY = "hexonisgoingtobethebestfuckingserversideeverlol";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -13,25 +11,28 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  const { username, script } = req.body;
+  let body = req.body;
+  // Vercel sometimes passes stringified JSON
+  if (typeof body === "string") {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      return res.status(400).json({ error: "Invalid JSON" });
+    }
+  }
 
+  const { username, script } = body;
   if (!username || !script) {
     return res.status(400).json({ error: "username and script are required" });
   }
 
-  // Add execution to log
-  const startTime = new Date().toISOString();
-  const logEntry = `${startTime} - ${username}: ${script}`;
-  executionLog.push(logEntry);
-
-  // Optional: keep last 20 executions
-  if (executionLog.length > 20) executionLog.shift();
+  // Add to log
+  const timestamp = new Date().toISOString();
+  executionLog.push(`${timestamp} - ${username}: ${script}`);
+  if (executionLog.length > 20) executionLog.shift(); // keep last 20
 
   // Simulate 3 seconds execution
   await new Promise(resolve => setTimeout(resolve, 3000));
 
-  res.status(200).json({
-    message: "Executed successfully",
-    currentLog: executionLog
-  });
+  res.status(200).json({ message: "Executed successfully", currentLog: executionLog });
 }
