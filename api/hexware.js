@@ -12,13 +12,9 @@ export default async function handler(req, res) {
   }
 
   let body = req.body;
-  // Vercel sometimes passes stringified JSON
   if (typeof body === "string") {
-    try {
-      body = JSON.parse(body);
-    } catch {
-      return res.status(400).json({ error: "Invalid JSON" });
-    }
+    try { body = JSON.parse(body); } 
+    catch { return res.status(400).json({ error: "Invalid JSON" }); }
   }
 
   const { username, script } = body;
@@ -26,11 +22,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "username and script are required" });
   }
 
-  // Add execution to log
   const timestamp = new Date().toISOString();
   executionLog.push(`${timestamp} - ${username}: ${script}`);
-
-  // Optional: keep last 20 executions
   if (executionLog.length > 20) executionLog.shift();
 
   // Simulate 3 seconds execution
