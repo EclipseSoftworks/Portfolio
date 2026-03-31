@@ -1,5 +1,5 @@
 let executionLog = [];
-const API_KEY = "hexonisgoingtobethebestfuckingserversideeverlol";
+const API_KEY = "my-secret-api-key";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -26,10 +26,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "username and script are required" });
   }
 
-  // Add to log
+  // Add execution to log
   const timestamp = new Date().toISOString();
   executionLog.push(`${timestamp} - ${username}: ${script}`);
-  if (executionLog.length > 20) executionLog.shift(); // keep last 20
+
+  // Optional: keep last 20 executions
+  if (executionLog.length > 20) executionLog.shift();
 
   // Simulate 3 seconds execution
   await new Promise(resolve => setTimeout(resolve, 3000));
